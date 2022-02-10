@@ -1,7 +1,44 @@
 language: php
 php:
-  - '5.4'
-  - '5.6'
-  - '7.0'
-  - hhvm # on Trusty only
-  - nightly
+
+- 5.6
+
+- 5.5
+
+- 5.4
+
+- 5.3
+
+script:
+
+- if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.6" ]]; then export CFLAGS="-Wno-deprecated-declarations -Wdeclaration-after-statement -Werror"; fi
+
+- phpize #and lots of other stuff here.
+
+- make
+
+matrix:
+
+include:
+
+- php: 5.6
+
+env: CFLAGS="-Wno-deprecated-declarations -Wdeclaration-after-statement -Werror"
+
+- php: 5.5
+
+env: CFLAGS=""
+
+- php: 5.4
+
+env: CFLAGS=""
+
+- php: 5.3
+
+env: CFLAGS=""
+
+script:
+
+- phpize #and lots of other stuff here.
+
+- make
