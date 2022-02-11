@@ -1,12 +1,16 @@
 language: php
 
 php:
-  - 7.1.9
-  - nightly
+  - 7.0
+  - 7.1
 
-env:
-  - APP_DEBUG=false
+before_script:
+  - composer install --prefer-dist --no-interaction
 
+script: phpunit --configuration phpunit.xml --coverage-text
 
 notifications:
-  email:false
+  notifications:
+    email:
+      on_success: always
+      on_failure: always
